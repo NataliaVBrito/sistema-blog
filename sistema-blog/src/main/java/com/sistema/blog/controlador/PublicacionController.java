@@ -18,6 +18,8 @@ import com.sistema.blog.DTO.PublicacionResponse;
 import com.sistema.blog.servicio.IPublicacionService;
 import com.sistema.blog.utilerias.AppConstantes;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/publicaciones")
 public class PublicacionController {
@@ -38,12 +40,12 @@ public class PublicacionController {
 	}
 
 	@PostMapping
-	public ResponseEntity<PublicacionDTO> guardarPublicacion(@RequestBody PublicacionDTO publicacionDTO) {
+	public ResponseEntity<PublicacionDTO> guardarPublicacion(@Valid @RequestBody PublicacionDTO publicacionDTO) {
 		return new ResponseEntity<>(publicacionServicio.crearPublicacion(publicacionDTO), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<PublicacionDTO> actualizarPublicacion(@PathVariable(name = "id") long id,
+	public ResponseEntity<PublicacionDTO> actualizarPublicacion(@Valid @PathVariable(name = "id") long id,
 			@RequestBody PublicacionDTO publicacionDTO) {
 		PublicacionDTO publicacionRespuesta = publicacionServicio.actualizarPublicacion(publicacionDTO, id);
 
