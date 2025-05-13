@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sistema.blog.DTO.ComentarioDTO;
 import com.sistema.blog.servicio.IComentarioService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/publicaciones")
 public class ComentarioController {
@@ -40,7 +42,7 @@ public class ComentarioController {
 	}
 
 	@PostMapping("/{publicacionId}/comentarios")
-	public ResponseEntity<ComentarioDTO> crearComentario(@PathVariable(value = "publicacionId") long publicacionId,
+	public ResponseEntity<ComentarioDTO> crearComentario(@Valid @PathVariable(value = "publicacionId") long publicacionId,
 			@RequestBody ComentarioDTO comentarioDTO) {
 		return new ResponseEntity<>(comentarioService.crearComentario(publicacionId, comentarioDTO),
 				HttpStatus.CREATED);
@@ -48,6 +50,7 @@ public class ComentarioController {
 
 	@PutMapping("/{publicacionId}/comentario/{comentarioId}")
 	public ResponseEntity<ComentarioDTO> actualizarComentarioPorId(
+			@Valid 
 			@PathVariable(value = "publicacionId") long publicacionId,
 			@PathVariable(value = "comentarioId") long comentarioId, @RequestBody ComentarioDTO comentarioDTO) {
 

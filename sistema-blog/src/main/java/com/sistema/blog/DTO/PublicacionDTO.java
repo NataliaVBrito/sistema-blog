@@ -4,12 +4,24 @@ import java.util.Set;
 
 import com.sistema.blog.entidades.ComentarioEntity;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class PublicacionDTO {
 
 	private Long id;
+	
+	@NotEmpty
+	@Size(min = 5, message = "El título debe contener al menos 5 carácteres")
 	private String titulo;
+	
+	@NotEmpty
+	@Size(min = 10, message = "La descripción debe contener al menos 10 carácteres")
 	private String descripcion;
+	
+	@NotEmpty
 	private String contenido;
+	
 	private Set<ComentarioEntity> comentarios;
 
 	public PublicacionDTO() {
